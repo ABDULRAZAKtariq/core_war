@@ -1,0 +1,57 @@
+JMZ A B
+
+type :
+
+A : {any} / {immédiat} : tout sauf immédiat
+B : {any} / {immédiat} : tout sauf immédiat
+
+une instruction qui vérifie si la valeur contenue dans le champ B de l'opérande B est égale à zéro. 
+Si c'est le cas, l'adresse de la mémoire spécifiée par l'opérande A est placée à la fin de la file d'attente du processus associé au programme en cours d'exécution.
+En d'autres termes, cette instruction saute à l'emplacement de mémoire spécifié par A, mais uniquement si la valeur de B est égale à zéro. 
+Si B n'est pas égal à zéro, l'instruction ne fait rien et l'exécution continue à l'adresse suivante.
+
+-exemple champ B de l'opérand B nul :
+
+file d'exécution 5 -> 16 -> 2 -> 6
+
+5] JMZ 2 4
+7] ADD #7 3
+9] DAT 0 0
+16] DAT 16 3
+2] DAT 11 11
+6] DAT 0 0 
+11] DAT 0 0
+
+file d'exécution après l'exécution de l'instruction à la case 5
+
+file d'exécution 5 -> 7 -> 16 -> 2 -> 6
+
+ici on vérifie si le champ B de l'instruction pointé par l'adresse direct 4 dans la case 5 , donc on fait 5 + 4 = 9
+DAT 0 0 le champ B est égal à 0 donc on va sauter à l'adresse 5 + A = 5 + 2 = 7
+
+
+exemple champ B de l'opérand B pas nul :
+
+file d'exécution 5 -> 16 -> 2 -> 6
+
+5] JMZ 2 4
+7] ADD #7 3
+9] DAT 0 1
+16] DAT 16 3
+2] DAT 11 11
+6] DAT 0 0 
+11] DAT 0 0
+
+file d'exécution après l'exécution de l'instruction à la case 5
+
+file d'exécution 5 -> 16 -> 2 -> 6
+
+ici on ne change rien car le champ B de la case pointé par l'opérand B n'est pas égal à 0
+
+
+
+
+
+L'instruction JMZ fonctionne de la même manière que l'instruction JMP, à l'exception du fait que le saut n'est effectué
+que si le(s) nombre(s) à l'adresse référencée par l'opérande B est zéro. Cela permet à l'instruction jmz de fonctionner
+ comme une instruction if dans un langage de niveau supérieur.

@@ -1,0 +1,31 @@
+Chaque guerrier a un ou plusieurs processus. Lorsque le guerrier est chargé pour la première fois dans Core, il reçoit un seul processus, 
+mais un guerrier peut gagner plus de processus en exécutant l'instruction spl.
+
+Au cours d'une partie de Corewar, chaque guerrier exécute à tour de rôle un seul processus. Au premier cycle du tour, 
+le premier guerrier exécute une instruction. Au cycle suivant, le guerrier suivant exécute une instruction. 
+Une fois que chaque guerrier a effectué son tour, le premier guerrier recommence.
+
+Si aucun guerrier n'exécute une instruction spl, c'est tout ce qu'il y a à faire et l'exécution se poursuit de cette manière, 
+chaque guerrier prenant son tour sur des cycles successifs jusqu'à la fin du tour.
+
+Lorsqu'une instruction spl est exécutée, le guerrier qui l'exécute gagne un nouveau processus. Maintenant, 
+lorsque le guerrier prend un tour, il exécute un processus et lorsqu'il obtient un tour suivant, il exécute l'autre processus.
+
+Par exemple, s'il y a deux guerriers dans un match, "imp" et "papier". 'Imp' a un seul processus (A). 
+'Papier' a deux processus (A et B). Dans cette situation, l'ordre du tour sera le suivant :
+
+Imp (A)
+Paper (A)
+Imp (A)
+Paper (B)
+Imp (A)
+Paper (A)
+etc..
+
+
+Notez que bien que Paper ait deux fois plus de processus que Imp, il n'obtient plus de tours. 
+En conséquence, chacun des processus de Paper s'exécute efficacement à la moitié de la vitesse du processus unique d'Imp.
+
+Bien sûr, un gros avantage d'avoir plusieurs processus est la résilience, 
+il sera plus difficile de tuer un guerrier avec de nombreux processus qu'un guerrier plus fragile avec un seul processus. 
+L'inconvénient des processus multiples est la complexité supplémentaire de la programmation multithread.

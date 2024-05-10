@@ -1,0 +1,114 @@
+source : https://corewar-docs.readthedocs.io/en/latest/redcode/addressing_modes/
+
+---opérandes 
+
+A et B
+
+Un opérande est un terme utilisé pour décrire un élément qui est utilisé par une instruction pour effectuer une opération. 
+Les opérandes sont généralement des valeurs numériques ou des références à des emplacements de mémoire qui contiennent des valeurs numériques. 
+Dans le cas des instructions Redcode, les opérandes sont utilisés pour spécifier les emplacements 
+de mémoire ou les valeurs utilisées par l'instruction pour effectuer une opération. 
+Les opérandes peuvent être immédiats ou indirects, en fonction du mode d'adressage utilisé pour les spécifier.
+
+
+
+---opcode :
+
+ADD SUB ...
+
+Un opcode est un terme utilisé pour décrire un code qui est utilisé pour identifier une instruction spécifique dans un ensemble d'instructions. 
+Il est généralement utilisé pour spécifier l'opération à effectuer par l'instruction.
+Dans le cas des instructions Redcode, l'opcode est un champ qui contient une valeur numérique unique pour chaque instruction. 
+Cette valeur est utilisée pour identifier l'instruction et spécifier l'opération à effectuer. 
+Les opcodes sont généralement codés sur un certain nombre de bits pour permettre un nombre limité d'instructions différentes dans un ensemble d'instructions.
+Il est important de noter qu'il existe des différentes manières de coder les opcodes, 
+et les choix implique des considérations de taille de mémoire et de performance pour les processeurs qui les exécutent.
+
+
+
+---offset ???
+
+Un offset est une valeur utilisée pour décaler une référence à une adresse mémoire. Dans le contexte de Redcode, 
+un offset est utilisé comme une valeur pour accéder à une adresse mémoire spécifique.
+
+Dans les modes d'adressage direct et indirect, l'offset est utilisé pour accéder à une adresse mémoire en utilisant une valeur donnée. 
+Par exemple, si l'on utilise l'offset 10 pour accéder à une adresse mémoire, 
+cela signifie qu'on va accéder à l'adresse mémoire qui se trouve 10 cases après l'adresse de départ dans la mémoire.
+
+Dans le mode d'adressage prédécrément indirect l'offset est utilisé de la même manière mais on retirera 1 à la valeur avant de l'utiliser pour accéder à l'adresse.
+
+En résumé, l'offset est utilisé pour accéder à une adresse mémoire spécifique en utilisant une valeur donnée, plutôt que de utiliser l'adresse mémoire elle-même.
+
+
+si nous sommes à la case 6 et qu'on utilise l'offset 10 alors nous allons à la case 16
+si nous somme à la case 6 et qu'on utilise l'offset -2 alors nous allons à la case 4
+
+
+
+---mode d'adressage circulaire ?
+
+Oui, l'adressage dans Redcode est circulaire. Cela signifie que lorsque l'on utilise un offset qui dépasse la taille de la mémoire, 
+l'adresse mémoire accédée est automatiquement "enroulée" de manière à ce qu'elle soit dans la plage de l'adresse 0 à la taille de la mémoire.
+
+Par exemple, si la mémoire a une taille de 8000 cases, et que l'instruction se trouve à l'adresse 7995 et utilise un offset de 10, 
+l'adresse mémoire accédée sera 5 (7995 + 10 = 8005, mais 8005 > 8000, donc 8005-8000=5)
+
+Cela permet aux programmes Redcode de boucler sur eux-mêmes et de continuer à fonctionner même si l'offset dépasse la taille de la mémoire.
+
+
+---mode d'adressage relative ?
+
+Oui, les modes d'adressage dans Redcode sont relatifs. Cela signifie que les adresses mémoire sont relatives à la position actuelle de l'instruction dans la mémoire. 
+Ainsi, lorsque l'on utilise un offset pour accéder à une adresse mémoire, cette adresse mémoire est déterminée en fonction de l'emplacement actuel de l'instruction dans la mémoire, 
+plutôt qu'en utilisant une adresse absolue.
+
+Cela permet de rendre les programmes Redcode plus flexibles et plus faciles à écrire, 
+car les programmes peuvent s'adapter automatiquement à des changements dans l'emplacement de la mémoire sans avoir à réécrire les adresses mémoire dans le code.
+
+
+
+
+
+---mode d'adressage ?
+
+ # <   @ 
+
+-Le mode d'adressage immédiat est un autre mode d'adressage utilisé dans Redcode. Il est introduit par le symbole "#". 
+Dans ce mode, la valeur de l'opérande n'est pas utilisée comme offset pour accéder à l'adresse mémoire, 
+mais est plutôt utilisée directement comme la donnée elle-même. Cela signifie que la valeur de l'opérande est utilisée comme la donnée à utiliser pour l'instruction, 
+il n'y a pas besoin de chercher dans la mémoire pour trouver la valeur. Ce mode est utile pour les instructions qui utilisent des valeurs immédiates pour des opérations arithmétiques ou logiques.
+
+-Le mode d'adressage direct est le mode d'adressage par défaut utilisé dans Redcode. Il permet d'accéder à une adresse mémoire en utilisant directement la valeur de l'opérande comme offset.
+Cela signifie que si l'instruction est actuellement stockée à l'adresse N de la mémoire et qu'elle utilise un opérande de valeur X comme offset, l'instruction accédera à l'adresse N+X de la mémoire.
+Par exemple, si l'instruction se trouve à l'adresse 5 de la mémoire et qu'elle utilise un opérande de valeur 3 comme offset, 
+l'instruction accédera à l'adresse 8 de la mémoire (5 + 3 = 8).
+Ce mode d'adressage est simple et facile à comprendre, il est utilisé lorsque l'on souhaite accéder directement à une adresse mémoire spécifique
+sans utiliser d'autres calculs ou de valeurs de mémoire intermédiaires.
+
+-Le symbole commercial arrobas (@) est utilisé pour introduire un opérande indirect. La valeur de l'opérande est utilisée comme un décalage, 
+comme c'est le cas avec l'adressage direct. L'opérande B de l'emplacement mémoire résultant 
+est ensuite utilisé comme un décalage à partir de l'emplacement mémoire d'où il a été récupéré. 
+L'emplacement mémoire résultant est la source et/ou la destination des données à utiliser par l'instruction, sinon c'est la destination pour les instructions de branchement.
+
+imaginons nous sommes à l'adresse 5
+
+5] mov @3 2
+8] ADD #3 #2   // 5 + 3 = 8 on récupere le B qui est 2 et on l'utilise comme offset à partir de notre emplacement, 8 + 2 = 10
+10] 5 
+
+-Le symbole moins (<) est utilisé pour introduire un opérande indirect pré-décrément. La valeur de l'opérande est utilisée comme un décalage, 
+comme c'est le cas avec l'adressage direct. L'opérande B de l'emplacement de la mémoire résultant est ensuite récupéré, décrémenté et restauré. 
+Il est ensuite utilisé comme un décalage à partir de l'emplacement de la mémoire d'où il a été récupéré. 
+L'emplacement de la mémoire résultant est la source et / ou la destination des données à utiliser par l'instruction, ou est la destination pour les instructions de branching.
+
+imaginons nous somme à l'adresse 5
+
+5] mov @3 2
+8] ADD #3 #7
+
+dans un premier temps on fait 5 + 3 pour avoir le 8, on récupere le 7, on lui retir 1 donc il devient 6, on stock le changement 
+8] ADD #3 #6
+puis on utilise le résultat comme offset à partir de la position actuel(8) cela donne 8 + 6 = 14.
+14] 55
+
+

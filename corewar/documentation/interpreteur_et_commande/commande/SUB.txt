@@ -1,0 +1,45 @@
+SUB A B    (comme add mais on retir au lieu d'ajouter)
+
+type :
+A -> any 
+B -> {any} / {immédiat} : tout sauf immédiat
+
+
+- Si l'opérande A est immédiat, il est retiré au champ B de l'opérande B. 
+
+- Si l'opérande A est pas immédiat à la fois le champ A et le champ B champ de l'opérande A sont retiré respectivement au champ A et B champ de l'opérande B.
+
+
+
+
+
+-exemple A immédiat, 
+7] SUB #4 5
+12] MOV #7 3
+
+après l'exécution de l'instruction à l'adresse 7,
+
+7] SUB #4 5
+12] MOV #7 -1 (car on fait 3 - 4)
+
+-exemple A pas immédiat, 
+
+ 
+7] SUB 4 5
+11] DAT 3 2
+12] MOV #7 3
+
+après l'exécution de l'instruction à l'adresse 7,
+
+
+7] SUB 4 5
+11] DAT 3 2
+12] MOV #4(7 - 3) 1 (2 - 1)
+
+
+
+
+
+
+Attention ici on peut avoir des valeur négatif pour les adresses , donc il faut gérer la mémoire de sorte que quand on est à la case 0 et qu'on doit aller à -2 relativement
+on doit aller à l'avant derniere case de la grille (circulaire)

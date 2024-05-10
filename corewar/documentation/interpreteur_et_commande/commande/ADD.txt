@@ -1,0 +1,37 @@
+ADD A B : 
+
+type :
+A -> any
+B -> {any} / {immédiat} : tout sauf immédiat 
+
+
+- Si l'opérande A est immédiat, il est ajouté au champ B de l'opérande B. 
+
+- Si l'opérande A est pas immédiat à la fois le champ A et le champ B champ de l'opérande A sont ajoutés respectivement au champ A et B champ de l'opérande B.
+
+
+-exemple A immédiat :
+
+4]ADD #5 3
+7]SUB 3 7
+
+après avoir exécuté la commande à l'adresse 4, 
+
+4] ADD #5 3
+7] SUB 3 12
+
+-exemple A pas immédiat :
+
+4] ADD 5 7
+9] MOV #3 7
+11] SUB 3 2
+
+après avoir exécuté la commande à l'adresse 4,
+
+4] ADD 5 7
+9] MOV #3 7
+11] SUB 6(3 + 3) 9(2 + 7)
+
+
+il faut faire attention ! quand on fait ce genre d'opération il faut que l'adresse soit circulaire car si on est à la 
+dernière case dans l'adresse et qu'on ajoute 1 on va dépasser donc il faut que (taille grille) + 1 renvoi la première case. 

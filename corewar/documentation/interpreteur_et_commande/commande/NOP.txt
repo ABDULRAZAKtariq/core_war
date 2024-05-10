@@ -1,0 +1,9 @@
+NOP A B 
+
+type :
+
+A -> any
+B -> any 
+
+
+une instruction qui ne fait rien elle sert juste à stocker les valeurs au départ (au début la grille est initaliser à NOP 0 0 

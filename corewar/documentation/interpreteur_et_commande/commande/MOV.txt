@@ -1,0 +1,54 @@
+MOV A B : Si l'opérande A est immédiat il est placé dans le champ B de l'emplacement mémoire spécifié par l'opérande B, 
+sinon le contenu de tout l'emplacement mémoire spécifié par l'opérande A est déplacé vers l'emplacement mémoire spécifié par le B
+
+-type :
+	A -> {any}
+	B -> {any}/{immédiat} tout sauf immédiat 
+
+Copie la case mémoire d’adresse A vers la case d’adresse B. Par exemple, MOV 0 1 copie l’adresse relative 0 (donc la case en cours d’exécution, soit l’instruction MOV 0 1 elle même) vers la case suivante (la prochaine exécutée). Cette seule instruction constitue un programme très court qui se recopie indéfiniment en mémoire. Son premier argument peut être de tout type (relatif, indirect ou immédiat) alors que son second ne peut être que relatif ou indirect.
+
+-exemple :
+
+A -> #
+
+5] MOV #4 2 
+7] DAT 0 0 
+
+après l'exécution de l'instruction à la case 5 :
+5] MOV #4 2
+7] DAT 0 4 
+
+----------------------------------------------------------------------
+
+A ->   
+
+5] MOV 4 6
+9] DATA 0 0 
+11] ADD #5 #4
+
+après l'exécution de l'instruction à la case  :
+
+5] MOV 4 6
+9] DATA 0 0 
+11] DATA 0 0
+
+----------------------------------------------------------------------
+A -> @
+
+5] MOV @3 5
+8] DAT 3 5
+10] DAT 0 0
+13] SUB #3 #2
+
+après l'exécution de l'instruction dans la case mémoire 5 :
+
+pour l'adresse de A, on commence par ajouter le 3 donc on arrive à la case 8, puis on ajoute l'opérand B qui est 5 donc on arrive
+à l'adresse 13 et on recopie ce qui est à l'adresse 13 5 cases après donc dans le 10
+
+5] MOV @3 5
+8] DAT 3 5
+10] SUB #3 #2
+13] SUB #3 #2
+
+
+

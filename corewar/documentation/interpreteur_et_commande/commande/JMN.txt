@@ -1,0 +1,13 @@
+JMN A B
+
+type :
+A -> {any}/{immédiat} : tout sauf immédiat
+B -> {any}/{immédiat} : tout sauf immédiat
+
+
+JMN A B est une instruction de programmation qui vérifie si la valeur contenue dans le champ B de l'opérande B est différente de zéro. 
+Si c'est le cas, l'adresse de la mémoire spécifiée par l'opérande A est placée à la fin de la file d'attente du processus associé au programme en cours d'exécution. 
+En d'autres termes, cette instruction saute à l'emplacement de mémoire spécifié par A, 
+mais uniquement si la valeur de B n'est pas égale à zéro. Si B est égale à zéro, l'instruction ne fait rien et l'exécution continue à l'adresse suivante.
+
+donc c'est le même principe que JMZ

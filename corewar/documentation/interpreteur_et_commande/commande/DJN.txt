@@ -1,0 +1,102 @@
+DJN A B
+
+type :
+A -> any / immédiat : tout sauf immédiat
+B -> any
+
+-Si l'opérande B n'est pas immédiat, le champ B de l'emplacement mémoire spécifié par l'opérande B est récupéré, décrémenté et restauré, 
+
+-si l'opérand B est immédiat le champ B de l'instruction en cours est utilisé(c'est à dire que c'est à lui qu'on va retirer 1 et le restocker). Si la valeur n'est pas zéro, 
+l'adresse de l'emplacement mémoire spécifié par l'opérande A est placée à la fin de la file d'attente de processus associée au programme en cours d'exécution.
+autrement dit on saute à l'instruction qui à l'adresse pointé par A
+
+
+-exemple B immédiat 
+
+file : 3 -> 667 -> 1664 -> 6
+
+
+3]DJN 2 #1
+5] MOV #3 5
+
+ici on regarde l'opérand B, on retire 1, 1-1 = 0 et on le restock donc on obtient 
+5] 2 #0
+puis si la valeur n'est pas 0 alorson saute à l'instruction stocké dans l'adresse pointé par A 
+ 
+file : 3 -> 667 -> 1664 -> 6 
+ici on change rien car la valeur obtenu est 0
+
+
+
+autre possibilité : 
+
+file : 3 -> 667 -> 1664 -> 6
+
+
+3] DJN 2 #2
+5] MOV #3 5
+
+ici on regarde l'opérand B, on retire 1, 2-1 = 1 et on le restock donc on obtien 
+5] 2 #1
+puis si la valeur n'est pas 0 alors on saute à l'instruction stocké dans l'adresse pointé par A 
+ 
+
+file : 3 -> 5 -> 667 -> 1664 -> 6 
+car c'est l'adresse 5 qui est pointé par l'opérand A
+
+
+-exemple B pas immédiat : 
+
+file : 3 -> 667 -> 1664 -> 6
+
+3] DJN 2 7
+5] MOV #3 5
+10] DAT 0 1
+
+ici on récupere le champ B de l'adresse pointé par l'opérand B , donc le champ B de l'adresse 10, c'est 1 , on le décrémente et on le restock :
+10] DAT 0 0
+si la valeur n'est pas 0 alors on saute à l'instruction stocké dans l'adresse pointé par A
+
+file : 3 -> 667 -> 1664 -> 6 
+ici on ne change rien car on obtien 0
+
+autre possibilité :
+
+file : 3 -> 667 -> 1664 -> 6
+
+3] DJN 2 7
+5] MOV #3 5
+10] DAT 0 2
+
+ici on récupere le champ B de l'adresse pointé par l'opérand B , donc le champ B de l'adresse 10, c'est 2 , on le décrémente et on le restock :
+10] DAT 0 1
+si la valeur n'est pas 0 alors on saute à l'instruction stocké dans l'adresse pointé par A
+
+file : 3 -> 5 -> 667 -> 1664 -> 6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

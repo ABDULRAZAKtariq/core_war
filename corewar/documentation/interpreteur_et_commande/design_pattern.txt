@@ -1,0 +1,11 @@
+Pour les instructions d'un interpréteur de code Redcode, il est recommandé d'utiliser le modèle de conception "Commande" (Command pattern). 
+Ce modèle de conception consiste à encapsuler chaque instruction Redcode dans une classe distincte, 
+qui contient toutes les informations nécessaires pour exécuter l'instruction (tels que les opérandes, les paramètres, etc.). 
+Cela permet de séparer la logique d'exécution de chaque instruction de la logique globale de l'interpréteur,
+et de rendre le programme plus facile à maintenir et à étendre.
+
+Il peut également être intéressant d'utiliser un modèle de conception "Visiteur" (Visitor pattern) pour traiter les instructions, 
+en séparant les données de l'algorithme pour parcourir ces données.
+
+pour la structure de donnée, au lieu de la passer en parametre de constructeur pour chaque classe, on la met en static comme ca toute les classses 
+instructions y aurant accées 

@@ -1,0 +1,68 @@
+source : https://sweetohm.net/article/corewarrior.html
+
+Dat - Data
+
+A mode -> any 
+B mode -> any
+
+Instruction non exécutable qui définit une constante en mémoire
+
+
+DAT A B : Cette instruction sert en réalité deux fonctions, une utilitariste et l'autre plutôt destructive. D'une part, 
+elle est utilisée pour stocker des données à utiliser comme compteur, pointeur, etc. Si elle est exécutée, cependant, 
+le processus est arrêté ! C'est alors le mécanisme permettant de remporter une victoire dans un Core War : 
+faire en sorte que tous les processus associés au programme de l'adversaire exécutent une instruction DAT.
+
+Si l'un des processus d'un guerrier exécute une instruction dat, il est retiré de la file de processus, c'est-à-dire terminé. 
+C'est la principale façon dont les guerriers sont tués dans le jeu Corewar.
+
+Notez que la terminaison du processus du guerrier se produit après l'évaluation des modes d'adressage des opérandes. Voir l'exécution pour plus de détails.
+
+Par exemple, si un guerrier exécutait la première instruction du bloc de code suivant :
+
+DAT 1, <1 ; <-- cette instruction est exécutée
+DAT 1, 1
+L'opérande B de la seconde instruction serait encore décrémenté, donnant :
+
+DAT 1, <1
+DAT 1, 0 ; <-- cette instruction a été modifiée
+
+
+
+
+En résumé, l'instruction DAT permet de tuer un processus en cours d'execution, et c'est la façon principale de tuer les programmes dans le jeu Corewar. 
+Elle possède deux opérandes A, B qui peuvent être utilisés pour stocker des données, 
+mais lorsque l'instruction est executée, le processus est arrêté. 
+si seul un opérande est spécifié, l'opérande A est défini par défaut à 0.
+
+
+C’est une déclaration de donnée. DAT 5 représente la valeur 5. Cette instruction n’est pas exécutable (si un programme doit l’exécuter, 
+il est arrêté). Elle ne comporte qu’un seul argument (la valeur) qui n’a pas de type (ni relatif, ni indirect ni immédiat).
+
+
+
+
+reformulation :
+
+Dans la norme ICWS-88, la commande DAT est utilisée pour tuer un processus en cours d'exécution. 
+Elle possède deux opérandes A et B qui peuvent être utilisés pour stocker des données,
+mais lorsque l'instruction DAT est exécutée, le processus est arrêté. C'est la principale façon de tuer les programmes dans le jeu Corewar.
+
+Cependant, contrairement à la norme ICWS'94, la norme ICWS-88 ne prévoit pas de modificateurs pour cette instruction. 
+Les opérandes sont adressés de manière implicite selon la valeur de l'opcode. Cela signifie qu'il n'y a pas de façon de spécifier 
+comment les opérandes sont traités, ils sont traités de manière déterminée par l'opcode DAT lui-même.
+
+En résumé, dans la norme ICWS-88, la commande DAT est utilisée pour tuer un processus en cours d'exécution, 
+mais il n'y a pas de modificateurs pour cette instruction, les opérandes sont adressés de manière implicite.
+
+
+Dans la norme ICWS-88, il est obligatoire de spécifier deux opérandes pour l'instruction DAT. 
+Les deux opérandes peuvent être des adresses de mémoire ou des valeurs directes. Lorsque l'instruction DAT est exécutée, 
+le processus en cours d'exécution est immédiatement tué, indépendamment de la valeur des opérandes.
+
+Il est à noter que dans les normes ICWS'94 et suivantes, il est possible de spécifier un seul opérande pour la commande DAT, 
+dans ce cas l'opérande A est défini par défaut à 0.
+
+En résumé, dans la norme ICWS-88, il est obligatoire de spécifier deux opérandes pour l'instruction DAT, 
+ces opérandes peuvent être des adresses de mémoire ou des valeurs directes, lorsque l'instruction DAT est exécutée, 
+le processus en cours d'exécution est immédiatement tué, indépendamment de la valeur des opérandes.

@@ -1,0 +1,17 @@
+Les joueurs s'affrontent dans le jeu de Corewar en écrivant Warriors. Un guerrier est un programme écrit dans un assemblage comme un langage de programmation appelé redcode. 
+Vous trouverez ci-dessous un exemple d'un simple guerrier Corewar nommé "nain".
+
+ajouter #4, 3
+mov 2, @2
+jmp-2
+dat #0, #0
+
+Un guerrier est composé d'un certain nombre d'instructions, chacune écrite sur une nouvelle ligne. L'exemple ci-dessus contient quatre instructions. Ainsi, 
+lorsque ce guerrier sera chargé dans le Core, il occupera quatre adresses mémoire consécutives.
+
+Les guerriers possèdent un ou plusieurs processus qui exécutent les instructions du guerrier de manière séquentielle. 
+Si un processus exécute une instruction illégale (généralement un dat, le processus est terminé. Si tous les processus d'un guerrier sont terminés, le guerrier est éliminé du tour.
+
+L'objectif de corewar est d'écrire un guerrier qui sera toujours en cours d'exécution (avoir des processus actifs) après que tous les autres guerriers aient été éliminés.
+
+

@@ -1,0 +1,114 @@
+il y a beaucoup de types de fenêtre comme JWindow ou autre.
+
+mais en générale on utiliser Jframe car elle nous donne beaucoup de liberté et surtout on peut mettre 
+n'importe quel titre pour notre application.
+
+
+
+=========================================================pack()====================================================
+La méthode pack() en Java Swing permet de redimensionner la fenêtre JFrame pour qu'elle s'ajuste à la taille optimale en fonction du contenu qu'elle contient. 
+Cela signifie que les composants tels que les boutons, les textes, etc. 
+sont pris en compte pour déterminer la taille minimale requise pour afficher correctement le contenu de la fenêtre.
+
+L'appel de la méthode pack() est généralement utilisé juste avant de rendre la fenêtre visible en utilisant la méthode setVisible(true). 
+Cela garantit que la fenêtre soit redimensionnée correctement avant d'être affichée à l'utilisateur.
+
+Il est important de noter que si vous effectuez des modifications au contenu de la fenêtre après avoir appelé pack(), 
+il est recommandé d'appeler à nouveau pack() pour refléter les modifications dans la taille de la fenêtre.
+
+si on appelle pack sur une Jframe vide alors cela va donner un tout petit onglet.
+
+
+
+=======================================================setLayout()===================================================
+
+set layout = définir la mise en page
+
+container1.setLayout(new FlowLayout());
+
+container2.setLayout(new FlowLayout());
+
+frame.setLayout(new FlowLayout());
+
+on peut avoir une mise en page pour chaque container(la frame est considérer comme un container)
+Il existe plusieurs types de gestionnaires de disposition dans Java qui peuvent être utilisés pour organiser les composants dans un conteneur. Voici les principaux types de gestionnaires de disposition disponibles dans la bibliothèque Swing de Java :
+
+FlowLayout : Les composants sont disposés les uns à côté des autres dans un ordre horizontal et sont automatiquement disposés sur plusieurs lignes 
+si la largeur du conteneur est insuffisante pour les accueillir tous sur une seule ligne.
+
+BorderLayout : Les composants sont disposés dans les cinq régions d'un conteneur : 
+nord, est, sud, ouest et centre. Chaque composant peut occuper une seule région.
+
+GridLayout : Les composants sont disposés dans un grille à plusieurs colonnes et plusieurs lignes. 
+Toutes les cellules ont la même taille.
+
+BoxLayout : Les composants sont disposés les uns à côté des autres dans une seule direction (horizontale ou verticale).
+
+CardLayout : Les composants sont disposés comme une pile de cartes. 
+Seul le composant supérieur est visible à tout moment, les autres composants étant cachés.
+
+Il est important de choisir le bon gestionnaire de disposition pour obtenir le rendu souhaité pour votre interface utilisateur. 
+Il peut être nécessaire de combiner différents gestionnaires de disposition pour obtenir un rendu complexe.
+
+==================================================================eventListeners==============================================
+
+pour gérer les évenemnt il existe plusieurs interface, comme ActionListener, AdjustmentListener, ItemListener
+, KeyListener, MouseListener et TextListener.
+
+chaque objet sur lequel on veut ajouter un listener, il faut utiliser la méthode : addTotoListener avec toto le nom du
+Listener comme par exemple addActionListener, ces méthodes prenne en paramêtre un objet qui implémente l'interface qui corréspont,
+par exemple si on utilise la méthode addActionListener() sur un objet, cela prend en paramêtre un ActionListener(un objet qui implémente
+l'interface ActionListener), cette interface posséde une seule méthode qui est : 
+void actionPerformed(ActionEvent e), cette méthode est inovqué lorsque le listener est activé(lorsqu'on click sur un bouton par exemple)
+cette méthode elle doit être redéfinit dans la classe qui implémente l'interface ActionListener, le paramêtre qu'elle prend est de type ActionEvent 
+ce type posséde une méthode qui nous intéresse :
+public Object getSource(), elle renvoi l'objet sur lequel le listener à été activé, elle le renvoi en type object donc 
+on peut caster pour avoir accés aux information de notre objet.
+
+par exemple si nous avons un capteur qui capte le click sur un bouton, quand le bouton est clické , la méthode actionPerformed est appelé, et 
+si on fait (JBoutton)(e.getSource()) on récupere notre bouton et on peut utiliser ces méthodes, 
+comme par exemple ((JBoutton)(e.getSource())).getTexte() alors que ceci n'aurait pas été possible si on aurait pas caster le e.getSource().
+
+
+autre exemple :
+ceci est la méthode appellé lorsqu'un élément a été sélectionné ou désélectionné par l'utilisateur. 
+Le code écrit pour cette méthode effectue les opérations qui doivent se produire lorsqu'un élément est sélectionné (ou désélectionné). 
+
+donc au départ nous avons notre objet sur le quel on doit mettre un capteur(avec la méthode addItemListener()),
+la méthode elle prend en paramêtre une classe qui implémente l'interface ItemListener, quand on implémente cette interface
+on doit coder la méthode :
+
+void itemStateChanged(ItemEvent e)
+
+pour gérer le comportement, le ItemEvent comme le ActionEvent il posséde la méthode getsource() qui renvoi l'objet pour lequel
+le listener est appellé(en type objet) et on peut caster aprés.
+
+le getSource() il renvoi le pointeur sur l'objet, donc avec le == on peut faire des comparaison pour savoir lequel de nous objet ont appellé 
+le listner.
+
+
+
+
+
+=======================================================================Classe anonnyme=========================================================
+
+pour éviter de crée une classe à chaque fois qu'on veut crée un nouveau Listener on peut utiliser les classe anonyme, 
+
+exemple :
+
+        simulation.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Graphic.goToFrame(homePage, Graphic.getSimulatorPage());
+            }
+        });
+
+
+ici ActionListener est une interface, mais vu qu'on utilise une classe anonyme c'est comme si on avait une nouvelle classe qui implementait 
+l'interface ActionListener, et donc dedans on doit redifinir les méthodes de l'interface, ici on a que public void actionPerformed(ActionEvent e)
+donc on le redéfinit.
+
+l'avantage de ceci est que la classe anonyme a accées aux attribut de la classe dans laquelle elle est, et donc c'est plus facile pour 
+gérer les evenement.
+
+
+

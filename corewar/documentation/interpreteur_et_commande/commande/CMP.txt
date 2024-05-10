@@ -1,0 +1,63 @@
+CMP A B
+
+type :
+A -> any
+B -> {any}/{immédiat} : tout sauf immédiat
+
+CMP instruction compare la valeur de l'opérande A avec la valeur de l'opérande B. 
+Si A est une valeur immédiate, il est comparé au champ B de l'emplacement mémoire spécifié par B.
+Si A n'est pas une valeur immédiate, le contenu de l'emplacement mémoire entier spécifié par A est comparé au contenu de l'emplacement mémoire spécifié par B.
+Si les valeurs comparées sont égales, l'instruction suivante est ignorée (le compteur de programme est incrémenté).
+
+
+-exemple A immédiat 
+file : 5 -> 7 -> 9 -> 11 -> 2
+
+5] CMP #3 5
+10] DAT 0 3
+
+après l'exécution de l'instruction à la case 5, 
+file : 5 -> 9 -> 11 -> 2
+
+ici 3 est égal au champ B de l'instruction pointé par l'opérand B
+
+
+autre possibilité :
+file : 5 -> 7 -> 9 -> 11 -> 2
+
+5] CMP #3 5
+10] DAT 0 4
+
+après l'exécution de l'instruction à la case 5, 
+file : 5 -> 7 -> 9 -> 11 -> 2
+
+il ne se passe rien car les valeurs ne sont pas égaux.
+
+-exemple A pas immédiat :
+file : 5 -> 7 -> 9 -> 11 -> 2
+
+5] CMP 3 5
+8] DAT 0 0
+10] DAT 0 0
+
+après l'exécution de l'instruction à la case 5, 
+file : 5 -> 9 -> 11 -> 2
+
+
+ici les contenu des cases pointé par A et B sont égaux donc on saute l'instruction d'après
+
+
+-autre possibilié :
+
+file : 5 -> 7 -> 9 -> 11 -> 2
+
+5] CMP 3 5
+8] DAT 0 0
+10] DAT 0 1
+
+après l'exécution de l'instruction à la case 5, 
+file : 5 -> 7 -> 9 -> 11 -> 2
+
+ici le contenu n'est pas exactement le même donc on ne change rien.
+
+

@@ -1,0 +1,45 @@
+class ADDInstruction {
+    public:
+        ADDInstruction(int op1, int op2, int dest) :
+            m_op1(op1), m_op2(op2), m_dest(dest) {}
+
+        void execute() {
+            static int memory[MEMORY_SIZE]; // tableau statique pour la mémoire
+            memory[m_dest] = memory[m_op1] + memory[m_op2];
+        }
+
+    private:
+        int m_op1; // l'opérande 1
+        int m_op2; // l'opérande 2
+        int m_dest; // la destination pour stocker le résultat
+};
+
+class SUBInstruction {
+    public:
+        SUBInstruction(int op1, int op2, int dest) :
+            m_op1(op1), m_op2(op2), m_dest(dest) {}
+
+        void execute() {
+            static int memory[MEMORY_SIZE]; // tableau statique pour la mémoire
+            memory[m_dest] = memory[m_op1] - memory[m_op2];
+        }
+
+    private:
+        int m_op1; // l'opérande 1
+        int m_op2; // l'opérande 2
+        int m_dest; // la destination pour stocker le résultat
+};
+
+
+-explication :
+
+Les deux classes d'instructions ADD et SUB ont la même signature de constructeur, qui prend en entrée les opérandes m_op1 et m_op2, 
+ainsi que la destination m_dest pour stocker le résultat. La méthode execute() des deux classes accède au tableau statique de la mémoire. 
+La classe ADDInstruction ajoute les valeurs des opérandes m_op1 et m_op2, et stocke le résultat dans la case mémoire de destination m_dest. 
+La classe SUBInstruction soustrait les valeurs des opérandes m_op2 à m_op1, et stocke le résultat dans la case mémoire de destination m_dest.
+
+En utilisant un tableau statique, les deux classes d'instructions partagent la même instance de la mémoire, 
+ce qui permet de conserver les données de la mémoire entre les exécutions des instructions, même si les méthodes execute() sont appelées plusieurs fois. 
+Il est important de noter que pour garantir une utilisation correcte de cette variable statique, 
+il est nécessaire de s'assurer qu'il n'y a qu'un seul thread d'exécution qui accède à ce tableau en même temps, 
+ou utiliser des mécanismes de synchronisation pour gérer les accès concurrents.

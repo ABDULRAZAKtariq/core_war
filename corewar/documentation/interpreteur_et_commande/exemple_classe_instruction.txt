@@ -1,0 +1,39 @@
+opcode operandAMode operandA operandBMode operandB
+
+ADD # A @ B
+
+public class RedcodeInstruction {
+    private Opcode opcode; // ADD SUB ...
+    private int operandA; 
+    private int operandB;
+    private boolean operandAMode; // true for direct addressing, false for indirect addressing we can use string if we got more modes
+    private boolean operandBMode; // true for direct addressing, false for indirect addressing we can use string if we got more modes
+
+    public RedcodeInstruction(Opcode opcode, int operandA, int operandB, boolean operandAMode, boolean operandBMode) {
+        this.opcode = opcode;
+        this.operandA = operandA;
+        this.operandB = operandB;
+        this.operandAMode = operandAMode;
+        this.operandBMode = operandBMode;
+    }
+
+    public Opcode getOpcode() {
+        return opcode;
+    }
+
+    public int getOperandA() {
+        return operandA;
+    }
+
+    public int getOperandB() {
+        return operandB;
+    }
+
+    public boolean isOperandAMode() {
+        return operandAMode;
+    }
+
+    public boolean isOperandBMode() {
+        return operandBMode;
+    }
+}

@@ -1,0 +1,232 @@
+-interpréteur redcode :
+
+
+1	Analyser le code Redcode : Vous devrez écrire un analyseur syntaxique qui peut lire le code Redcode en entrée et le convertir en une forme interne que votre programme peut comprendre. 
+	Cela peut inclure la reconnaissance des instructions, des adresses de mémoire et des opérandes.
+
+2	Écrire un moteur d'exécution : Vous devrez écrire un moteur d'exécution qui peut prendre en entrée le code Redcode analysé et l'exécuter en simulant l'environnement de Corewar. 
+	Cela peut inclure l'exécution des instructions Redcode, l'accès à la mémoire et la gestion des sauts conditionnels.
+
+3	Gérer la mémoire: Vous devrez écrire une gestion de la mémoire pour simuler l'espace de mémoire virtuel dans lequel les programmes Redcode combattent.
+	Cela peut inclure la création d'un tableau pour stocker les instructions et les données, et des fonctions pour lire et écrire des données dans cette mémoire.
+
+4	Ajoutez des fonctionnalités de débogage: Il est important d'ajouter des fonctionnalités de débogage pour permettre au développeur de suivre l'exécution du programme et de détecter les erreurs. 
+	Cela peut inclure des fonctions pour afficher la mémoire, les registres et les états de la machine virtuelle.
+
+5	Testez et debuggez votre interpréteur. Assurez-vous de tester votre interpréteur sur un grand nombre de programmes Redcode pour vous assurer qu'il fonctionne correctement. 
+	Utilisez des outils de débogage pour résoudre les problèmes lorsque cela est nécessaire.
+
+
+-Les instructions :
+
+	Il est possible de créer des classes pour représenter les différentes instructions Redcode dans un programme d'interpréteur Redcode. 
+	Cela peut aider à organiser le code et à faciliter la maintenance et l'extensibilité du programme.
+
+	En utilisant des classes pour représenter les instructions, vous pouvez créer une classe pour chaque instruction Redcode, 
+	qui contient les données nécessaires pour l'exécution de cette instruction, ainsi qu'une méthode pour exécuter l'instruction. 
+	Cela peut inclure des informations telles que les opérandes, les adresses de mémoire et les états de la machine virtuelle.
+
+	En créant des classes pour les instructions, vous pouvez également implémenter des fonctionnalités de débogage, 
+	comme l'affichage de l'état de la mémoire avant et après l'exécution de l'instruction
+
+
+	
+	Liste d'instruction utilisées pour écrire des programmes (appelés "warriors") pour Corewar:
+
+1		DAT (Data) : Cette instruction permet de définir une valeur de données à une adresse de mémoire spécifique.
+
+2		MOV (Move) : Cette instruction permet de copier une valeur de données d'une adresse de mémoire à une autre.
+
+3		ADD (Add) : Cette instruction permet d'ajouter une valeur à une adresse de mémoire.
+
+4		SUB (Subtract) : Cette instruction permet de soustraire une valeur d'une adresse de mémoire.
+
+5		JMP (Jump) : Cette instruction permet de sauter à une adresse de mémoire spécifique.
+
+6		JMZ (Jump if zero) : Cette instruction permet de sauter à une adresse de mémoire spécifique si la valeur à une adresse de mémoire spécifiée est égale à zéro.
+
+7		JMN (Jump if not zero) : Cette instruction permet de sauter à une adresse de mémoire spécifique si la valeur à une adresse de mémoire spécifiée est différente de zéro.
+
+8		DJN (Decrement and jump if not zero) : Cette instruction décrémente une valeur à une adresse de mémoire spécifiée et saute à une adresse de mémoire 
+		spécifiée si la valeur est différente de zéro.
+
+9		SPL - Cette instruction permet de lancer un nouveau processus à une autre instruction.
+
+10		CMP (Compare) : Cette instruction permet de comparer deux valeurs de mémoire et de définir un indicateur de résultat.
+	
+
+
+
+		L'instruction SPL (Split) permet de lancer un nouveau processus (ou thread) à une autre instruction spécifiée. Cela signifie qu'après l'exécution de cette instruction, 
+		le programme actuel se poursuit à l'instruction suivante tout en lancant un nouveau processus qui commence à exécuter les instructions à l'emplacement spécifié. 
+		Cela permet au programme de s'exécuter sur plusieurs processus simultanément, augmentant ainsi les capacités de calcul.
+
+		Dans Core War, l'instruction SPL est utilisée pour lancer des "sous-programmes" qui peuvent combattre d'autres programmes en parallèle. 
+		Cela permet au programme principal de continuer à exécuter ses instructions tout en lançant des processus qui peuvent attaquer les programmes adverses.
+
+		L'utilisation de SPL nécessite une attention particulière pour éviter les boucles infinies ou les conflits de mémoire. 
+		Il est important de noter que le nouveau processus partage la même mémoire que le processus parent, 
+		il est donc important de gérer correctement les accès à la mémoire pour éviter les conflits.
+
+
+-Les paramétres pour les instructions :
+
+
+	les instructions Redcode prennent généralement des paramètres. Les paramètres peuvent être des adresses de mémoire, 
+	des valeurs immédiates ou des indicateurs de mode (indirection). Les instructions Redcode utilisent ces paramètres pour effectuer des opérations sur la mémoire, 
+	comme la lecture et l'écriture de données, le déplacement de pointeur, la comparaison de valeurs, l'exécution de sauts conditionnels, etc.
+
+	Les paramètres sont généralement stockés avec l'instruction elle-même dans la structure de données utilisée pour stocker les instructions Redcode. 
+	Il est important de noter que le nombre de paramètres et leur format dépendent de l'opcode de l'instruction.
+
+	Par exemple, l'instruction MOV a généralement deux paramètres: une adresse de destination et une adresse source. L'instruction ADD, 
+	quant à elle, a généralement deux paramètres: une adresse de destination et une valeur immédiate.
+
+	Il est important de noter que le format et la sémantique des paramètres dépendent de la version de Redcode utilisée. 
+	Il existe plusieurs variantes de Redcode qui peuvent avoir des différences dans les paramètres et les instruction. 
+	Il est donc important de se référer à la documentation de la version de Redcode utilisée pour comprendre les paramètres et les instructions disponibles.
+
+
+-La mémoire :
+
+	Il est possible d'utiliser une grille pour représenter la mémoire dans un programme Core War. 
+	Cela pourrait être utile si vous voulez visualiser les données de la mémoire de manière plus graphique ou si vous voulez implémenter des règles de jeu qui dépendent de 
+	l'emplacement des programmes dans la mémoire.
+
+
+	Dans Core War, les programmes partagent tous la même zone mémoire, qui est un espace de mémoire partagé utilisé par tous les programmes en compétition. 
+	Les programmes, écrits en langage assembleur Redcode, sont chargés dans cette mémoire et peuvent ensuite s'exécuter, 
+	envoyer des données à d'autres programmes et tenter de détruire les programmes adverses.
+
+	Cela signifie que tous les programmes peuvent accéder aux mêmes emplacements mémoire et se contaminer mutuellement en écrivant sur les mêmes emplacements de mémoire, 
+	c'est pourquoi il est important de mettre en place des mécanismes pour gérer les collisions entre les différents programmes dans la mémoire.
+
+	Il est important de noter que la taille de la mémoire est généralement définie avant le début de la compétition, 
+	et les programmes peuvent seulement accéder à des emplacements mémoire spécifiques pour éviter les collisions.
+
+	Utiliser des moniteurs de synchronisation: Vous pouvez utiliser des moniteurs de synchronisation pour synchroniser l'accès à la mémoire partagée. Par exemple, 
+	vous pouvez utiliser des objets de verrouillage pour verrouiller des sections de mémoire spécifiques lorsque les programmes y accèdent. 
+	Cela permet de gérer les accès concurrents à la mémoire partagée et d'éviter les collisions entre les programmes.
+
+
+-comment se passe le combat ?? :
+	
+	Dans Core War, les programmes se battent entre eux en s'exécutant simultanément dans l'espace de mémoire partagé. Les programmes, 
+	écrits en langage assembleur Redcode, sont chargés dans cette mémoire et peuvent ensuite s'exécuter, envoyer des données à d'autres programmes et tenter de détruire les programmes adverses.
+
+	Les programmes peuvent utiliser des instructions Redcode pour effectuer différentes opérations, telles que la lecture et l'écriture de données dans la mémoire, 
+	le saut à des emplacements spécifiques de la mémoire, la comparaison de valeurs et l'exécution de sous-programmes.
+
+	Les programmes peuvent également utiliser des instructions spéciales pour détruire les autres programmes en écrivant des données spécifiques sur des 
+	emplacements de mémoire occupés par d'autres programmes. Ces instructions sont appelées des "bombe" ou des "splash".
+
+	Les programmes peuvent également utiliser des techniques pour éviter d'être détruits, telles que la duplication de soi-même dans différentes parties de la mémoire, 
+	la création de boucles infinies pour épuiser les ressources des autres programmes et la création de sous-programmes pour effectuer des tâches spécifiques.
+
+	Le but final de Core War est de détruire tous les programmes adverses en laissant son propre programme en cours d'exécution. 
+	La compétition se termine lorsqu'il ne reste qu'un programme en cours d'exécution ou lorsque le nombre maximum d'itérations a été atteint.
+
+	Il est important de noter que le Core War est un jeu de programmation défensif, 
+	ou les programmes doivent se protéger d'eux-même et d'autres programmes qui cherchent à les détruire.
+
+
+
+-1vs1 ? :
+	
+	Les combats dans Core War peuvent être entre plusieurs programmes en même temps. 
+	Les programmes sont chargés dans un espace de mémoire partagé et s'exécutent simultanément, 
+	ce qui signifie qu'ils peuvent tous interagir les uns avec les autres.
+
+	Il est possible de mettre en place des compétitions à un contre un, où deux programmes s'affrontent directement, mais il est plus commun d'avoir des compétitions à plusieurs programmes, 
+	où plusieurs programmes sont chargés dans la mémoire et se battent les uns contre les autres pour être le dernier en cours d'exécution.
+
+
+
+-parseur c'est quoi ? :
+
+
+	Un parseur est un programme ou une bibliothèque logicielle qui analyse une séquence d'entrée, comme une chaîne de caractères ou un fichier, 
+	et la convertit en une structure de données interne plus facile à manipuler. Les parseurs sont utilisés dans de nombreux domaines, notamment la programmation, 
+	les bases de données et les recherches d'informations.
+
+	Il existe différents types de parseurs, chacun adapté à des types d'entrée et de structures de données différents. 
+	Les parseurs les plus courants sont les parseurs de grammaire, les parseurs de balises, 
+	les parseurs de code et les parseurs de données.
+
+
+	Les parseurs de code sont utilisés pour analyser les programmes dans un langage de programmation donné. 
+	Ils peuvent être utilisés pour vérifier la syntaxe, générer des informations sur les dépendances, 
+	ou convertir le code en un autre format.
+
+
+
+	Dans le cas de Corewar, le parseur permet de lire le code écrit en langage Redcode, 
+	de vérifier sa syntaxe, et de l'adapter à la structure de données interne utilisée par le programme pour l'exécution des opérations.
+
+
+-Les programmes sont lancé en même temps ? 
+
+
+	Dans Core War, les programmes sont généralement lancés simultanément, c'est-à-dire qu'ils commencent tous à s'exécuter en même temps lorsque la compétition démarre. 
+	Les programmes s'exécutent simultanément dans l'espace de mémoire partagé, ce qui signifie qu'ils peuvent tous interagir les uns avec les autres en utilisant 
+	des instructions Redcode pour lire et écrire des données dans la mémoire, sauter à des emplacements spécifiques de la mémoire, comparer des valeurs et exécuter des sous-programmes.
+
+	Il est important de noter que les programmes ne sont pas nécessairement synchronisés, c'est-à-dire qu'ils ne s'exécutent pas tous à la même vitesse ou en même temps. 
+	Les programmes peuvent s'exécuter plus lentement ou plus rapidement en fonction de leur code et de leur méthode d'exécution. 
+	Certains programmes peuvent également créer des boucles infinies pour épuiser les ressources des autres programmes, ce qui peut rendre la compétition plus difficile.
+
+	Il est également possible de mettre en place des règles de jeu pour limiter le temps d'exécution des programmes ou pour limiter 
+	le nombre d'instructions qu'ils peuvent exécuter pour éviter les boucles infinies.
+	
+	En résumé, les programmes sont généralement lancés simultanément dans Core War, 
+	mais ils peuvent s'exécuter à des vitesses différentes et certains peuvent utiliser des techniques pour épuiser les ressources des autres programmes. 
+	Les règles de jeu et les limites de temps/nombre d'instructions peuvent être mise en place pour équilibrer la compétition.
+
+
+-comment stocker le redcode ? :
+
+	Pour stocker le code Redcode dans Core War, il est généralement utilisé des tableaux ou des listes pour stocker les instructions Redcode. 
+	Les instructions sont stockées comme des objets ou des structures de données individuels, 
+	chacun contenant les informations nécessaires pour exécuter l'instruction, comme l'opcode, les paramètres, etc.
+
+	Il est également important de noter que la structure de données utilisée pour stocker le code Redcode devra être compatible avec le parseur utilisé pour analyser 
+	le code et le convertir en une structure interne utilisable par le programme d'exécution.
+
+
+-fonction intérpréteur :
+
+	il est généralement nécessaire de créer une fonction qui prend en entrée un tableau d'instructions Redcode et qui exécute le programme. 
+	Cette fonction est généralement appelée "boucle d'exécution" ou "interpréteur" et est 
+	responsable de parcourir les instructions dans le tableau et de les exécuter une par une.
+
+	La boucle d'exécution pourra utiliser des structures de contrôle de flux comme des boucles for ou while pour parcourir les instructions dans le tableau, 
+	et utiliser des instructions switch ou if-else pour déterminer quelle action exécuter en fonction de l'opcode de chaque instruction.
+
+	Il est important de noter que la boucle d'exécution devra également gérer les sauts conditionnels, 
+	les appels de sous-programmes et les autres opérations de contrôle de flux.
+
+	Il est également important de gérer les erreurs et les exceptions qui peuvent survenir lors de l'exécution du programme, 
+	comme les accès à des emplacements mémoire illégaux, les erreurs de syntaxe dans les instructions Redcode, etc.
+
+	En résumé, il est important de créer une fonction qui prend en entrée un tableau d'instructions Redcode et qui exécute le programme, 
+	cette fonction est généralement appelée boucle d'exécution ou interpréteur, elle parcours les instructions, les exécutes une par une, gère les
+
+
+chemin à faire :
+
+commande --> parseur --> intérpréteur --> mémoire --> premiére exécution de redCode --> premier combat 1vs1 --> 
+test avec n programmes en même temps-->générateur de programmes redCode --> algorithme génétique 
+				     --> interface graphique pour voir la mémoire
+
+
+algo génétique : Implémenter un système à base de règles ou un algorithme génétique pour générer des programmes performants
+	
+
+
+
+
+
+
+
+
+

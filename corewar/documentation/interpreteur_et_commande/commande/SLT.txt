@@ -1,0 +1,62 @@
+SLT A B
+
+type :
+
+A -> any
+B -> {any} / {immédiat} : tout sauf immédiat
+
+Si l'opérande A n'est pas immédiat, le champ B de l'emplacement mémoire spécifié par l'opérande A est comparé au champ B de l'opérande B, 
+si l'opérande A est immédiat alors c'est lui-même qui est utilisé dans la comparaison. 
+Si la valeur A est inférieure à la valeur B, l'instruction suivante est ignorée (le compteur de programme est incrémenté).
+
+
+-exemple A immédiat :
+
+file : 5 -> 8 -> 13 -> 3
+
+5] SLT #3 2
+7] DAT 0 4
+
+donc ici on compare la valeur 3 avec la valeur dans le champ B de l'adresse pointé par notre opérand B, 3 < 4 donc on ignore l'instruction suivante
+
+file :file : 5 -> 13 -> 3
+
+autre possibilité :
+
+file : 5 -> 8 -> 13 -> 3
+
+5] SLT #3 2
+7] DAT 0 2
+
+donc ici on compare la valeur 3 avec la valeur dans le champ B de l'adresse pointé par notre opérand B, 3 > 2 donc on ne change rien
+
+file : 5 -> 8 -> 13 -> 3
+
+
+-exemple A pas immédiat :
+file : 5 -> 8 -> 13 -> 3
+
+
+5]SLT 5 2
+7] DAT 3 9
+10] DAT 0 5
+
+ici on va chercher le champ B de la case mémoire pointé par l'opérand A , c'est donc 5, puis on cherche le champ B de la case mémoire pointé par l'opérand B
+donc 9 A < B <=> 5 < 9 donc on ingore l'instruction suivante
+
+file : 5 -> 13 -> 3
+
+autre possibilité :
+
+
+file : 5 -> 8 -> 13 -> 3
+
+
+5]SLT 5 2
+7] DAT 3 4
+10] DAT 0 5
+
+ici on va chercher le champ B de la case mémoire pointé par l'opérand A , c'est donc 5, puis on cherche le champ B de la case mémoire pointé par l'opérand B
+donc 4 A < B <=> 5 < 4 donc c'est faux donc on ne change rien
+
+file :  5 -> 8 -> 13 -> 3

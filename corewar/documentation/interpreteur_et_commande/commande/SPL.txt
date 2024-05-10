@@ -1,0 +1,23 @@
+SPL A B
+A -> any / immédiat : tout sauf immédiat 
+B -> any (on l'utilise pas )
+
+
+SPL : crée un nouveau processus démarrant à l'adresse A
+
+il faut faire attention à la file de processus il faut pas qu'elle soit depassé en terme de taille, 
+ce processus crée est exécuté "en même temps" que le processus originale.
+après avoir exécuté cette instruction le processus crée démarre à l'adresse pointé par l'opérand A mais le programme originale continue son 
+exécution.
+
+
+
+par exemple :
+
+file : 5 -> 11 -> 17 -> 3
+
+5] SPL 2 3
+7] MOV #3 4
+
+ici quand on exécute l'instruction à l'adresse 5, on crée un nouveau processus qui va exécuter l'instruction dans la case mémoire 7.
+et notre programme originale passe à l'instruction 11, car 5 -> 11 -> 17 -> 3

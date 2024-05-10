@@ -1,0 +1,26 @@
+JMP A B
+A -> {any} / {immédiat} : tout sauf immédiat  
+B -> any 
+
+JMP est une instruction qui place l'adresse de la mémoire spécifiée par l'opérande A à la fin de la file d'attente du processus associé au programme 
+en cours d'exécution. L'opérande B ne participe pas nécessairement à l'exécution de cette instruction. En d'autres termes, 
+cette instruction saute à l'emplacement de mémoire spécifié par A, et B n'est pas utilisé dans cette opération.
+
+
+file d'éxecution 4 -> 17 -> 13 :
+
+
+4] JMP 3 #4
+7] ADD 2 3
+17] MOV #3 4
+13] ADD #5 3
+
+après l'exécution de l'instruction à l'adresse 4, la file devient 4 -> 7 -> 17 -> 13 (on saute directement à l'instruction ciblé)
+
+
+
+L'instruction JMP modifie l'adresse de la prochaine instruction qui sera exécutée par le processus en cours d'exécution.
+Les utilisations les plus courantes de cet opcode sont la création d'une boucle ou le saut d'une section de code.
+L'instruction jmp sautera l'exécution à l'adresse donnée par l'opérande A de l'instruction. L'opérande B n'a pas d'utilité 
+dans l'instruction jmp. Cependant, l'opérande B sera toujours évalué
+Avec l'instruction jmp, l'opérande A est toujours utilisé comme adresse de saut.
